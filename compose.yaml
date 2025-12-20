@@ -1,0 +1,26 @@
+services:
+  diun:
+    image: crazymax/diun:${SERVICE_VERSION}
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    command: serve
+    environment:
+      - LOG_LEVEL=info # debug || info
+      - TZ=${TZ}
+    volumes:
+      - .docker/data:/data # db
+      - .docker/diun.yaml:/etc/diun/diun.yaml # static config
+    networks: # required to contact notifiers
+      - service-net
+    healthcheck:
+      test: ["CMD", "diun", "--version"]
+      interval: 60m
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  service-net:
+    name: ${SERVICE_NET}
