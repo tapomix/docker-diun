@@ -1,0 +1,15 @@
+db: # @see volumes in compose.yaml
+  path: /data/diun.db
+
+watch:
+  # cron schedule
+  schedule: "@daily"
+  # no need to check on server (re)start
+  runOnStartup: false
+
+providers:
+  docker:
+    # auto scan containers without using labels
+    watchByDefault: true
+    # watch all images
+    watchStopped: true
