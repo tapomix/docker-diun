@@ -1,0 +1,17 @@
+# ide
+/.idea/
+/.vscode/
+
+# env vers
+/.env
+
+# custom docker compose
+/compose.override.yaml
+
+# volumes
+/.docker/data/*
+!/.docker/data/.gitkeep
+
+# secrets
+/.docker/.secrets/*
+!/.docker/.secrets/.gitkeep
