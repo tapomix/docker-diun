@@ -6,6 +6,9 @@ services:
     user: ${UID}:${GID}
     security_opt:
       - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
     command: serve
     environment:
       - LOG_LEVEL=info # debug || info
