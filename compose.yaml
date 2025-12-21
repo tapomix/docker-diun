@@ -3,6 +3,7 @@ services:
     image: crazymax/diun:${SERVICE_VERSION}
     container_name: ${CONTAINER_NAME}
     restart: unless-stopped
+    user: ${UID}:${GID}
     security_opt:
       - no-new-privileges:true
     command: serve
