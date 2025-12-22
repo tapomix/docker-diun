@@ -2,8 +2,6 @@ db: # @see volumes in compose.yaml
   path: /data/diun.db
 
 watch:
-  # cron schedule
-  schedule: "@daily"
   # no need to check on server (re)start
   runOnStartup: false
 
