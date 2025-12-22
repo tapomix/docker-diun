@@ -16,8 +16,9 @@ services:
     volumes:
       - .docker/data:/data # db
       - .docker/diun.yaml:/etc/diun/diun.yaml # static config
-    networks: # required to contact notifiers
-      - service-net
+    networks:
+      - service-net # required to contact notifiers
+      - socket-proxy-net
     healthcheck:
       test: ["CMD", "diun", "--version"]
       interval: 60m
@@ -28,3 +29,6 @@ services:
 networks:
   service-net:
     name: ${SERVICE_NET}
+  socket-proxy-net:
+    external: true
+    name: ${SOCKET_PROXY_NET}
