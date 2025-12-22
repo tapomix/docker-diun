@@ -11,11 +11,10 @@ services:
     read_only: true
     command: serve
     environment:
-      - DIUN_PROVIDERS_DOCKER_ENDPOINT=${DOCKER_ENDPOINT} # to use socket proxy
-      - DIUN_WATCH_SCHEDULE=${CRON_SCHEDULE} # customize cron timer
-
-      - LOG_LEVEL=info # debug || info
-      - TZ=${TZ}
+      DIUN_PROVIDERS_DOCKER_ENDPOINT: ${DOCKER_ENDPOINT} # to use socket proxy
+      DIUN_WATCH_SCHEDULE: ${CRON_SCHEDULE} # customize cron timer
+      LOG_LEVEL: info # debug || info
+      TZ: ${TZ}
     volumes:
       - .docker/data:/data # db
       - .docker/diun.yaml:/etc/diun/diun.yaml # static config
