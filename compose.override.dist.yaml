@@ -1,0 +1,35 @@
+services:
+  diun:
+    environment:
+      # file provider
+      DIUN_PROVIDERS_FILE_FILENAME: /etc/diun/images.yaml
+
+      # debugging
+      # DIUN_WATCH_RUNONSTARTUP: true
+      # DIUN_WATCH_FIRSTCHECKNOTIF: true
+      # LOG_LEVEL: debug
+
+      # ntfy notifier
+      DIUN_NOTIF_NTFY_ENDPOINT: ${NTFY_ENDPOINT}
+      DIUN_NOTIF_NTFY_TOKENFILE: /run/secrets/ntfy-token
+      DIUN_NOTIF_NTFY_TOPIC: ${NTFY_TOPIC}
+      DIUN_NOTIF_NTFY_TAGS: whale
+      DIUN_NOTIF_NTFY_TEMPLATETITLE: ${NOTIF_TITLE}
+      DIUN_NOTIF_NTFY_TEMPLATEBODY: ${NOTIF_BODY}
+
+    volumes:
+      # - /var/run/docker.sock:/var/run/docker.sock:ro # direct socket access (risky)
+      - .docker/images.yaml:/etc/diun/images.yaml:ro # file provider
+
+    secrets:
+      - ntfy-token
+
+networks:
+  # use existing network from notifier to contact it + internet access
+  # this avoids creating 2 separate networks
+  service-net:
+    external: true
+
+secrets:
+  ntfy-token:
+    file: .docker/.secrets/token-ntfy.txt
