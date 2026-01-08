@@ -15,3 +15,6 @@
 # secrets
 /.docker/.secrets/*
 !/.docker/.secrets/.gitkeep
+
+# specific images to check
+/.docker/images.yaml
