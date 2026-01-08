@@ -9,24 +9,41 @@ services:
     cap_drop:
       - ALL
     read_only: true
+
     command: serve
+
     environment:
       DIUN_PROVIDERS_DOCKER_ENDPOINT: ${DOCKER_ENDPOINT} # to use socket proxy
       DIUN_WATCH_SCHEDULE: ${CRON_SCHEDULE} # customize cron timer
       LOG_LEVEL: info # debug || info
       TZ: ${TZ}
+
     volumes:
       - .docker/data:/data # db
       - .docker/diun.yaml:/etc/diun/diun.yaml # static config
+
     networks:
       - service-net # required to contact notifiers
       - socket-proxy-net
+
     healthcheck:
       test: ["CMD", "diun", "--version"]
       interval: 60m
       timeout: 10s
       retries: 3
       start_period: 30s
+
+    # limit resources
+    cpus: 0.25
+    mem_limit: 64m
+    pids_limit: 10
+
+    # logging
+    logging:
+      driver: json-file
+      options:
+        max-size: 2m
+        max-file: 3
 
 networks:
   service-net:
