@@ -36,7 +36,7 @@ services:
     # limit resources
     cpus: 0.25
     mem_limit: 64m
-    pids_limit: 10
+    pids_limit: 25 # at least 20+
 
     # logging
     logging:
