@@ -161,7 +161,7 @@ If you prefer direct socket access, **add** the following to `compose.override.y
 services:
   diun:
     environment:
-      DIUN_PROVIDERS_DOCKER_ENDPOINT: unix:///var/run/docker.sock
+      DIUN_PROVIDERS_DOCKER_ENDPOINT: "unix:///var/run/docker.sock"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
@@ -247,9 +247,15 @@ The container is configured with security best practices:
 - **Read-only filesystem**: The container filesystem is mounted as read-only
 - **Dropped capabilities**: All Linux capabilities are dropped (`cap_drop: ALL`)
 - **No privilege escalation**: `no-new-privileges:true` prevents privilege escalation
-- **Resource limits**: CPU, memory and process limits are enforced (`cpus: 0.25`, `mem_limit: 64m`, `pids_limit: 10`)
+- **Resource limits**: CPU, memory and process limits are enforced (`cpus: 0.25`, `mem_limit: 64m`, `pids_limit: 25`)
 
-> The resources limitations are intentionally strict as Diun is a lightweight service. If needed, you can extend them via `compose.override.yaml
+> [!NOTE]
+> The resources limitations are intentionally strict as Diun is a lightweight service. If needed, you can extend them via `compose.override.yaml`.
+
+<!-- -->
+
+> [!WARNING]
+> Do not set `pids_limit` below 20. While the service runs fine with lower values (= 10), executing additional commands (like `diun notif test`) requires the Go runtime to spawn extra threads, which will fail if the limit is too restrictive.
 
 ## Usage
 
