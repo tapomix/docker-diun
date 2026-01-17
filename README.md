@@ -283,6 +283,12 @@ docker compose logs -f
 docker compose down --remove-orphans
 ```
 
+## Alternatives
+
+- [Watchtower](https://containrrr.dev/watchtower/) - Automatically updates running containers when new images are available
+- [What's up Docker (WUD)](https://getwud.com/) - Web UI for monitoring and updating Docker images with multi-registry support
+- [Ouroboros](https://github.com/pyouroboros/ouroboros) - Lightweight auto-updater for Docker containers (archived project)
+
 ## Resources
 
 - [Diun documentation](https://crazymax.dev/diun/)
