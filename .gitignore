@@ -2,7 +2,7 @@
 /.idea/
 /.vscode/
 
-# env vers
+# env vars
 /.env
 
 # custom docker compose
