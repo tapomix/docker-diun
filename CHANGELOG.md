@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.1.1] - 2025-01-18
+
+### Fixed
+
+- Fix deprecated `security_opt` syntax
+- Fix `pids_limit` too restrictive
+
+### Documentation
+
+- Add alternatives section
+- Explain `pids_limit` upgrade considerations
+
+---
+
 ## [0.1.0] - 2025-01-07
 
 Initial release.
